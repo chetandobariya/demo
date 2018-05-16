@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="PinkPastel">#f7e0df</color>
+    <color name="SearchTextColor">#666666</color>
+    <color name="PlaceholderTextColor">#999999</color>
+    <color name="LightBackgroundColor">#f5f5f5</color>
+    <color name="BadgeTextColor">#A12741</color>
+    <color name="MenuItemTitleColor">#808080</color>
+    <color name="MenuItemSeparatorColor">#F2F2F2</color>
+    <color name="LightGrayLineColor">#E6E5E2</color>
+    <color name="LightGrayBorderColor">#E6E5E2</color>
+    <color name="HomeButtonTitleColor">#FFFFFF</color>
+    <color name="HomeButtonBackgroundColor">#9F2943</color>
+</resources>
+
