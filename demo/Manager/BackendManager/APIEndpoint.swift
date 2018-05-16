@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import ObjectMapper
+
+
+class ApiEndpoint<T: Mappable>
+{
+    var config: BackendConfiguration {
+        
+        return BackendManager.defaultConfiguration
+    }
+}

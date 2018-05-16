@@ -10,18 +10,57 @@ import UIKit
 
 class ProductDetailViewController: UIViewController {
 
+    @IBOutlet weak private var firstname: UILabel!
+    @IBOutlet weak var userProfileImage: UIImageView!
+    
+    @IBOutlet weak private var favoriteButton: UIButton!
+    private var isFavourite = false
+    var repositoryItems: Repositories?
+    var profileImage:UIImage?
+    
+    
     override func viewDidLoad() {
+        
+        self.title = "Detail Page"
         super.viewDidLoad()
-
+        self.setUpUserData()
+        
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+//        if isFavourite {
+//            UserDefaultsHelper.isFavourite = true
+//        }
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
 
+    }
+    
+    func setUpUserData() {
+        
+        self.firstname.text = self.repositoryItems?.name
+        self.userProfileImage.image = self.profileImage
+    }
+
+    @IBAction func makeFavourite(_ sender: Any) {
+        
+        
+        if isFavourite {
+                isFavourite = false
+        }else{
+                 isFavourite = true
+        }
+        let buttonImage = isFavourite ? Assets.filledStar.image : Assets.unFilledStar.image
+        favoriteButton.setImage(buttonImage, for: .normal)
+
+    }
     /*
     // MARK: - Navigation
 

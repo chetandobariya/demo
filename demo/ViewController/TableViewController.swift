@@ -30,6 +30,10 @@ class TableViewController: UITableViewController {
         refresh.addTarget(self, action: #selector(refreshTableData(_:)), for: .valueChanged)
 
       //  self.tableView?.registerNib(cellType: RepositoryCell.self)
+        
+        //TableView UITest setup
+        tableView.accessibilityIdentifier = "table-repository"
+
         self.fetchOwner()
         super.viewDidLoad()
         
@@ -70,17 +74,14 @@ class TableViewController: UITableViewController {
     private func refreshRepositories (with repositories: [Repositories]) {
         
         DispatchQueue.global(qos: .utility).sync {
+            
             self.repositories = repositories
-//            for repo in self.repositories {
-//
-//                //print(repo.owner?.avatarUrl)
-//            }
         }
+        
         self.tableView.reloadData()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
@@ -92,12 +93,13 @@ extension TableViewController  {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(cellType: RepositoryCell.self, for: indexPath)
-    
         cell.setup(with: self.repositories[indexPath.row])
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return self.repositories.count
 
     }
@@ -111,13 +113,24 @@ extension TableViewController  {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+      
         DispatchQueue.main.async {
             
-            let productDetailController = StoryboardScene.Main.productDetailView.instantiate()
+
+            let  productDetailController = StoryboardScene.Main.productDetailView.instantiate()
+            productDetailController.repositoryItems = self.repositories[indexPath.row]
+
+            if let selectedCell = tableView.cellForRow(at: indexPath) as? RepositoryCell {
+                productDetailController.profileImage = selectedCell.userProfile.image
+            }
+
             self.navigationController?.pushViewController(productDetailController, animated: true)
-//                   let navigationController = UINavigationController(rootViewController: productDetailController)
-//                   navigationController.modalPresentationStyle = .overFullScreen
-//                    self.present(navigationController, animated: true, completion: nil)
+
+       
+//            let webViewController = WebViewController()
+//            let navigationController = UINavigationController(rootViewController: webViewController)
+//            navigationController.modalPresentationStyle = .overFullScreen
+//            self.present(navigationController, animated: true, completion: nil)
             
         }
        
