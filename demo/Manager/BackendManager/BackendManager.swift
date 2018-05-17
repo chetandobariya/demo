@@ -171,7 +171,6 @@ class BackendManager
             apiRequest.dataRequest.responseObject(keyPath: endPoint.dataKeyPath, completionHandler:
                 { (response: DataResponse<ModelType>) -> Void in
                     
-                    print(response.result)
                     switch response.result
                     {
                     case .failure(let error):
